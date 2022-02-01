@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="row">
+      <h1><%= @work_space.name%></h1>
+    </div>
+
+    <div class="row mb-3">
+      <%= link_to "編集", edit_work_space_path(@work_space), class:"btn btn-success" %>
+      <%= link_to "削除", work_space_path(@work_space), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
+    </div>
+    <div class="row">
+      <% def display_tree(horon) %>
+        <li>
+          <div class="dropdown">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= horon.name%>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <%= link_to "詳細", work_space_horon_path(horon.work_space_id, horon.id), class:"dropdown-item" %>
+              <%= link_to "編集", edit_work_space_horon_path(horon.work_space_id, horon.id), class:"dropdown-item" %>
+              <%= link_to "削除", work_space_horon_path(horon.work_space_id, horon.id), method: :delete, class:"dropdown-item" %>
+              <%= link_to "これより下のホロンを全て削除", destroy_all_work_space_horon_path(horon.work_space_id, horon.id), method: :delete, class:"dropdown-item" %>
+            </div>
+          </div>
+          <ul>
+            <% horon.children.each do |h| %>
+              <% display_tree(h) %>
+            <% end %>
+          </ul>
+        </li>
+      <% end%>
+
+      <% unless Horon.where(work_space_id: @work_space.id).count.zero? %>
+        <div class="row">
+          <div class="col-12 display-tree">
+            <ul>
+              <% display_tree(Horon.find(@work_space.root_id)) %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <%= link_to new_work_space_horon_path(@work_space.id), class:"btn btn-block btn-outline-primary" do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
+

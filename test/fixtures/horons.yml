@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  work_space_id: 1
+  name: MyString
+  parent_id: 1
+  last_update_user_id: 1
+
+two:
+  work_space_id: 1
+  name: MyString
+  parent_id: 1
+  last_update_user_id: 1

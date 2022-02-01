@@ -1,0 +1,33 @@
+<% @horon.parent_id = nil %>
+<%= form_with model:[@work_space, @horon] do |f| %>
+
+  <div class="row form-group">
+    <%= f.label :parent_id, class:"col-md-3 col-form-label" do %>
+      <span class="badge bg-danger text-white">必須</span> 親のホロン
+    <% end %>
+    <div class="col-md-8">
+      <% horon = [] %>
+      <% horon.push(@horon) %>
+      <%= f.collection_select :parent_id, Horon.where(work_space_id: @work_space.id) - horon, :id, :name, {prompt: "このホロンを一番上にする"}, {class: "custom-select"} %>
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <%= f.label :name, class:"col-md-3 col-form-label" do %>
+      <span class="badge bg-danger text-white">必須</span> ホロンの名前
+    <% end %>
+    <div class="col-md-8">
+      <%= f.text_field :name, class: "form-control", id:"keyword-input" %>
+      <div id="horon_search--result">
+        <ul class="list-group horon-search-list">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-sm-3 offset-sm-4">
+      <%= f.submit "保存する", class: "btn btn-info btn-block" %>
+    </div>
+  </div>
+<% end %>

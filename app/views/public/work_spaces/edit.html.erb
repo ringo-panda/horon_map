@@ -1,0 +1,6 @@
+<h2>ホラーキー編集</h2>
+<%= form_with model:@work_space do |f| %>
+  <%= f.label :name, "ホラーキーの名前" %>
+  <%= f.text_field :name %>
+  <%= f.submit "保存する", class:"btn btn-success" %>
+<% end %>

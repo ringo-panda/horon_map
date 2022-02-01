@@ -1,0 +1,23 @@
+<h2>パスワード再設定</h2>
+
+<p>登録いただいているメールアドレスにパスワード再設定用のメールを送信します。</p>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
+
+  <div class="form-group">
+    <%= f.label :email, class:"col-md-6 col-form-label mb-2" do %>
+      <span class="badge bg-danger text-white">必須</span> 登録済みのメールアドレス
+    <% end %>
+    <div class="col-md-6">
+      <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <%= f.submit "パスワード再登録メールを送る", class:"btn btn-primary btn-block mb-5" %>
+  </div>
+
+<% end %>
+
+<%= render "public/shared/links" %>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HoronMap</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+
+
+<body>
+  <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="container">
+      <% if user_signed_in? %>
+        <%= link_to current_user.name, user_path(current_user), class:"navbar-brand" %>
+      <% else %>
+        <%= link_to "HoronMap", root_path, class:"navbar-brand" %>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ホラーキー
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if current_user.work_spaces.present? %>
+                  <% user_work_spaces = current_user.work_spaces %>
+                  <% user_work_spaces.each do |work_space| %>
+                    <%= link_to work_space.name, work_space_path(work_space), class:"dropdown-item" %>
+                  <% end %>
+                  <div class="dropdown-divider"></div>
+                <% end %>
+                <%= link_to "ホラーキーを新規作成する", new_work_space_path, class:"dropdown-item" %>
+              </div>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"nav-link active" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_user_registration_path, class:"nav-link active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_user_session_path, class:"nav-link active" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container mt-3">
+      <%= yield %>
+    </div>
+  </main>
+  </body>
+</html>
