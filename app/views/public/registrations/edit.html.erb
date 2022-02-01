@@ -26,7 +26,7 @@
       <span class="badge bg-secondary text-white">任意</span> 現在のパスワード
     <% end %>
     <div class="col-md-6">
-      <%= f.text_field :current_password, autofocus: true, autocomplete: "current-password", class: "form-control" %>
+      <%= f.password_field :current_password, autofocus: true, autocomplete: "current-password", class: "form-control" %>
       <small class="form-text text-muted">(パスワードを変更しない場合は空欄のみ入力が必要です)</small>
     </div>
   </div>
@@ -42,7 +42,7 @@
       <% end %>
     <% end %>
     <div class="col-md-6">
-      <%= f.text_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
       <small class="form-text text-muted">(パスワードを変更しない場合は空欄のままにしてください)</small>
     </div>
   </div>
@@ -52,7 +52,7 @@
       <span class="badge bg-secondary text-white">任意</span> 新しいパスワード(確認用)
     <% end %>
     <div class="col-md-6">
-      <%= f.text_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: "form-control" %>
+      <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: "form-control" %>
       <small class="form-text text-muted">(パスワードを変更しない場合は空欄のままにしてください)</small>
     </div>
   </div>
